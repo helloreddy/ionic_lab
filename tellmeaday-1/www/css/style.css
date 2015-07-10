@@ -1,0 +1,27 @@
+/* Empty. Add your own CSS if you like */
+.list.card {
+  margin: 0 0 0 0;
+}
+
+.card .item:first-child {
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: gray;
+}
+
+.card.item:last-child {
+  border-bottom: 0;
+}
+
+.tabs-striped .tabs{
+  border-bottom: 0;
+}
+
+.nav-title-slide-ios7.bar.bar-header {
+   background-color: #393E54;
+   border-color: #393E54
+}
+
+.nav-bar-title {
+  color: #ffffff;
+}
