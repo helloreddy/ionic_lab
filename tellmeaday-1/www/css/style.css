@@ -1,27 +1,62 @@
 /* Empty. Add your own CSS if you like */
 .list.card {
-  margin: 0 0 0 0;
+  //margin: 0 0 0 0;
+}
+
+span.nav-bar-title {
+  text-align: left;
+}
+
+.item h2 {
+  font-weight: bold;
+  color: #3F51B5;
 }
 
 .card .item:first-child {
-  border-top-style: solid;
+  /*border-top-style: solid;
   border-top-width: 1px;
-  border-top-color: gray;
+  border-top-color: gray;*/
 }
 
 .card.item:last-child {
   border-bottom: 0;
 }
 
+.tabs-striped.tabs-color-light {
+  background-color: #3F51B5;
+}
+
 .tabs-striped .tabs{
   border-bottom: 0;
+  background-color: #3F51B5;
 }
 
 .nav-title-slide-ios7.bar.bar-header {
-   background-color: #393E54;
-   border-color: #393E54
+   background-color: #3F51B5;
+   border-color: #3F51B5;
 }
 
-.nav-bar-title {
+.nav-title-slide-ios7.bar.bar-header {
   color: #ffffff;
 }
+
+.item-body a {
+  text-decoration: none;
+}
+
+/* 작성자 이름 잘보이게 */
+.item.item-avatar h2 {
+  overflow: visible;
+}
+
+ion-content {
+  background-color: #FAFAFA;
+}
+
+/*.item.item-avatar p {
+  text-align: right;
+}*/
+
+/*.item.item-avatar .author_wrapper {
+  width: 40%;
+}*/

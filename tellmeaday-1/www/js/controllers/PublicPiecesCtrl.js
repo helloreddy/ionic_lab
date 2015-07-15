@@ -1,6 +1,4 @@
-angular.module('tellmeaday', ['ionic', 'PieceService'])
-
-.controller('PublicPiecesCtrl', function($scope, PieceService, $timeout){
+app.controller('PublicPiecesCtrl', ['$scope', 'PieceService', '$timeout', function($scope, PieceService, $timeout){
 
   $scope.pieces = [];
   $scope.pieces = PieceService.allSync();
@@ -9,14 +7,11 @@ angular.module('tellmeaday', ['ionic', 'PieceService'])
     console.log('Loading more!');
     $timeout(function(){
       $scope.pieces.push({
+        id : '1',
         author : 'Mido Lee',
         date : 'July 05, 2015',
         img : './img/mcfly.jpg',
-        content : '
-        This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-        the content is from a card-body consisting of an image and paragraph text. The footer
-        consists of tabs, icons aligned left, within the card-footer.
-        '
+        content : 'Lorem ipsum dolor sit amet, amet vulputate lacus convallis class, posuere tellus ornare eget pede nec sapien, purus aliquam quisque blandit wisi. Odio blandit et dolor, cras iaculis wisi lobortis euismod, a integer faucibus, vel hendrerit tempor. Hendrerit metus, pulvinar tristique orci in neque, ligula molestie recusandae. Sit wisi, purus vehicula metus, donec vivamus donec urna leo maecenas non, integer ligula orci turpis a.'
       });
 
       $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -24,6 +19,6 @@ angular.module('tellmeaday', ['ionic', 'PieceService'])
       $scope.$broadcast('scroll.resize')
     }, 1000);
 
-  }
+  };
 
-});
+}]);
