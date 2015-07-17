@@ -3,9 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-  <title>@TELLMEADAY</title>
+  <!-- <title>@TELLMEADAY</title> -->
 
+  <!-- Ionic's CSS -->
   <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <!-- Fontawesome CSS -->
+  <link href="lib/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
   <link href="css/style.css" rel="stylesheet">
 
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -13,58 +17,70 @@
   -->
 
   <!-- ionic/angularjs js -->
+  <script src="js/jquery.min.js"></script>
   <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="lib/angular-elastic/elastic.js"></script>
 
   <!-- cordova script (this will be a 404 during development) -->
   <script src="cordova.js"></script>
 
   <!-- your app's js -->
   <script src="js/app.js"></script>
+  <script src="js/directives/BottomTabsDrtv.js"></script>
   <script src="js/services/PieceService.js"></script>
   <script src="js/controllers/PublicPiecesCtrl.js"></script>
   <script src="js/controllers/PieceDetailCtrl.js"></script>
+  <script src="js/controllers/FriendsPiecesCtrl.js"></script>
+  <script src="js/controllers/WritePieceCtrl.js"></script>
 </head>
-<body ng-app="tellmeaday" nav-router animation="slide-left-right-ios7" bgcolor="#A6B5CF">
+<body ng-app="tellmeaday" nav-router="" animation="slide-left-right-ios7" bgcolor="#A6B5CF">
 
   <!-- The nav bar that will be updated as we navigate -->
   <ion-nav-bar class="nav-title-slide-ios7">
     <ion-nav-back-button class="button-clear">
-      <i class="ion-arrow-left-b"></i>
+      <i class="ion-ios-arrow-left"></i>
     </ion-nav-back-button>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon icon ion-ios-search main-search"></button>
+    </ion-nav-buttons>
   </ion-nav-bar>
 
   <ion-nav-view></ion-nav-view>
 
   <div class="tabs-striped tabs-color-light">
     <div class="tabs">
-      <a class="tab-item active" href="#">
-        <i class="icon ion-filing"></i>
-        Test
+      <a class="tab-item active" href="#/" active="">
+        <i class="fa fa-th public"></i>
+        <!-- <i class="icon ion-filing"></i>
+        Test -->
       </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-star"></i>
-        Favorites
+      <a class="tab-item" href="#/pieces/friends" active="">
+        <i class="fa fa-users friend"></i>
+        <!-- <i class="icon ion-star"></i>
+        Favorites -->
       </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-compose"></i>
-        Favorites
+      <a class="tab-item" href="#/piece/write" active="">
+        <i class="fa fa-pencil write"></i>
+        <!-- <i class="icon ion-compose"></i>
+        Favorites -->
       </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-heart"></i>
-        Favorites
+      <a class="tab-item" href="#" active="">
+        <i class="fa fa-bell-o noti"></i>
+        <!-- <i class="icon ion-heart"></i>
+        Favorites -->
       </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-person"></i>
-        Settings
+      <a class="tab-item" href="#" active="">
+        <i class="fa fa-user my"></i>
+        <!-- <i class="icon ion-person"></i>
+        Settings -->
       </a>
     </div>
   </div>
 
   <script type="text/ng-template" id="/public_pieces.html">
-    <ion-view title="TMDP">
+    <ion-view title="Tellmeaday">
 
-      <ion-content class="has-header has-footer" on-infinite-scroll="loadMore()">
-
+      <ion-content class="has-header has-footer public_pieces-ion-content" on-infinite-scroll="loadMore()">
         <div class="list card" ng-repeat="piece in pieces">
           <div class="item item-avatar">
             <img ng-src="{{piece.img}}">
@@ -72,72 +88,168 @@
             <p>{{piece.date}}</p>
           </div>
           <div class="item item-body">
-            <a href="#/piece/{{piece.id}}" type="item-link">
-            <p>
+            <p class="public_pieces piece-title">To remember me..</p>
+            <a href="#/piece/detail/{{piece.id}}" type="item-link">
+            <p class="item-body-content">
               {{piece.content}}
             </p>
             </a>
-            <p>
-              <a href="#" class="subdued">1 Like</a>
-              <a href="#" class="subdued">5 Comments</a>
+            <p class="item-body-subdued">
+              <a href="#" class="subdued">
+                <i class="ion-ios-heart"></i>
+                <span class="public_pieces like-count"> 17 </span>
+                &nbsp;&nbsp;
+                <i class="ion-ios-chatbubble"></i>
+                <span class="public_pieces comment-count"> 5</span>
+              </a>
             </p>
           </div>
-          <div class="item tabs tabs-secondary tabs-icon-left">
-            <a class="tab-item" href="#">
-              <i class="icon ion-thumbsup"></i>
-              Like
+
+          <div class="public_pieces item tabs tabs-secondary tabs-icon-left">
+            <a class="public_pieces piece-icon-bottom-wrap tab-item" href="#">
+              <!-- <i class="icon ion-thumbsup"></i>
+              Like -->
+              <!-- <i class="fa fa-heart-o fa-2x"></i> -->
+              <i class="public_pieces piece-icon-bottom like ion-ios-heart-outline"></i>
             </a>
-            <a class="tab-item" href="#">
-              <i class="icon ion-chatbox"></i>
-              Comment
+            <a class="public_pieces piece-icon-bottom-wrap tab-item" href="#">
+              <!-- <i class="icon ion-chatbox"></i> Comment -->
+              <!-- <i class="fa fa-comment-o fa-2x"></i> -->
+            <i class="public_pieces piece-icon-bottom comment ion-ios-chatbubble-outline"></i>
             </a>
+            <!--
             <a class="tab-item" href="#">
               <i class="icon ion-share"></i>
               Share
             </a>
+            -->
           </div>
         </div>
       </ion-content>
-
     </ion-view>
   </script>
 
   <script type="text/ng-template" id="/piece_detail.html">
-    <ion-view view-title="{{title}}" ng-init="setTitleAlignLeft()">
-      <ion-content class="has-header has-footer">
-
+    <ion-view view-title="{{title}}">
+      <ion-content class="has-header has-footer piece_detail-ion-content">
         <div class="list card">
           <div class="item item-avatar">
             <img ng-src="{{piece.img}}">
             <h2 class="piece_author">{{piece.author}}</h2>
             <p>{{piece.date}}</p>
           </div>
-          <div class="item item-body">
-            <p>
+          <div class="item item-body piece_detail">
+            <p class="piece_detail piece-title">To remember me..</p>
+            <p class="item-body-content">
               {{piece.content}} Lorem ipsum dolor sit amet, amet vulputate lacus convallis class, posuere tellus ornare eget pede nec sapien, purus aliquam quisque blandit wisi. Odio blandit et dolor, cras iaculis wisi lobortis euismod, a integer faucibus, vel hendrerit tempor. Hendrerit metus, pulvinar tristique orci in neque, ligula molestie recusandae. Sit wisi, purus vehicula metus, donec vivamus donec urna leo maecenas non, integer ligula orci turpis a.
             </p>
-            <p>
-              <a href="#" class="subdued">1 Like</a>
-              <a href="#" class="subdued">5 Comments</a>
+            <p class="item-body-subdued">
+              <a href="#" class="subdued">
+                <i class="ion-ios-heart"></i>
+                <span class="piece_detail like-count"> 17 </span>
+                &nbsp;&nbsp;
+                <i class="ion-ios-chatbubble"></i>
+                <span class="piece_detail comment-count"> 5</span>
+              </a>
             </p>
           </div>
-          <div class="item tabs tabs-secondary tabs-icon-left">
-            <a class="tab-item" href="#">
-              <i class="icon ion-thumbsup"></i>
-              Like
+          <div class="item item-body piece_detail comment" ng-repeat="comment in comments" >
+            <p><b>{{comment.author}}</b>
+              {{comment.content}}
+            </p>
+          </div>
+          <div class="piece_detail item tabs tabs-secondary tabs-icon-left">
+            <a class="piece_detail piece-icon-bottom-wrap tab-item" href="#">
+              <!-- <i class="icon ion-thumbsup"></i>
+              Like -->
+              <!-- <i class="fa fa-heart-o fa-2x"></i> -->
+              <i class="piece_detail piece-icon-bottom like ion-ios-heart-outline"></i>
             </a>
-            <a class="tab-item" href="#">
-              <i class="icon ion-chatbox"></i>
-              Comment
+            <a class="piece_detail piece-icon-bottom-wrap tab-item" href="#">
+              <!-- <i class="icon ion-chatbox"></i> Comment -->
+              <!-- <i class="fa fa-comment-o fa-2x"></i> -->
+            <i class="piece_detail piece-icon-bottom comment ion-ios-chatbubble-outline"></i>
             </a>
+            <!--
             <a class="tab-item" href="#">
               <i class="icon ion-share"></i>
               Share
             </a>
+            -->
           </div>
         </div>
       </ion-content>
+    </ion-view>
+  </script>
 
+  <script type="text/ng-template" id="/friends_pieces.html">
+    <ion-view title="Tellmeaday">
+
+      <ion-content class="has-header has-footer friends_pieces-ion-content" on-infinite-scroll="loadMore()">
+        <div class="list card" ng-repeat="piece in pieces">
+          <div class="item item-avatar">
+            <img ng-src="{{piece.img}}">
+            <h2>{{piece.author}}</h2>
+            <p>{{piece.date}}</p>
+          </div>
+          <div class="item item-body">
+            <p class="friends_pieces piece-title">To remember me..</p>
+            <a href="#/piece/{{piece.id}}" type="item-link">
+            <p class="item-body-content">
+              {{piece.content}}
+            </p>
+            </a>
+            <p class="item-body-subdued">
+              <a href="#" class="subdued">
+                <i class="ion-ios-heart"></i>
+                <span class="friends_pieces like-count"> 17 </span>
+                &nbsp;&nbsp;
+                <i class="ion-ios-chatbubble"></i>
+                <span class="friends_pieces comment-count"> 5</span>
+              </a>
+              <!-- <a href="#" class="subdued">5 Comments</a> -->
+            </p>
+          </div>
+          <div class="item tabs tabs-secondary tabs-icon-left">
+            <a class="friends_pieces piece-icon-bottom-wrap tab-item" href="#">
+              <!-- <i class="icon ion-thumbsup"></i>
+              Like -->
+              <!-- <i class="fa fa-heart-o fa-2x"></i> -->
+              <i class="friends_pieces piece-icon-bottom like ion-ios-heart-outline"></i>
+            </a>
+            <a class="friends_pieces piece-icon-bottom-wrap tab-item" href="#">
+              <!-- <i class="icon ion-chatbox"></i>
+              Comment -->
+              <!-- <i class="fa fa-comment-o fa-2x"></i> -->
+            <i class="friends_pieces piece-icon-bottom comment ion-ios-chatbubble-outline"></i>
+            </a>
+            <!--
+            <a class="tab-item" href="#">
+              <i class="icon ion-share"></i>
+              Share
+            </a>
+            -->
+          </div>
+        </div>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script type="text/ng-template" id="/write_piece.html">
+    <ion-view title="{{title}}" class="write_piece-ion-view">
+      <ion-content class="has-header has-footer write_piece-ion-content">
+        <div class="list card write_piece-list-card">
+          <div class="item item-avatar write_piece-item-avatar">
+            <img ng-src="{{piece.img}}">
+            <h2>{{piece.author}}</h2>
+            <p>{{piece.date}}</p>
+          </div>
+        </div>
+        <div class="list write_piece-wrap">
+            <input class="write_piece-input-text" type="text" placeholder="제목">
+            <textarea class="has-header has-footer write_piece-textarea animate msd-elastic: \n" placeholder="내용" ng-model="writedPiece"></textarea>
+        </div>
+      </ion-content>
     </ion-view>
   </script>
 
